@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" th:href="@{/cars}">Request car</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" >Pricing</a>
+                </li>
+            </ul>
+      </span>
+        </div>
+    </div>
+</nav>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Mark</th>
+            <th scope="col">Model</th>
+            <th scope="col">Manufacture year</th>
+            <th scope="col">Availability</th>
+            <th scope="col">Price per day</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="car: ${cars}">
+            <td><a th:href="@{/cars/{id}(id = ${car.id})}" th:text="${car.mark}" class="link-light" /></td>
+            <td><a th:href="@{/cars/{id}(id = ${car.id})}" th:text="${car.model}" class="link-light" /></td>
+            <td><a th:href="@{/cars/{id}(id = ${car.id})}" th:text="${car.manufactureYear}" class="link-light" /></td>
+            <td><a th:href="@{/cars/{id}(id = ${car.id})}"
+                   th:if="${car.availability == 'true'}" th:text="Available"
+                    class="link-light" />
+                <a th:href="@{/cars/{id}(id = ${car.id})}"
+                   th:unless="${car.availability == 'true'}" th:text="Unavailable"
+                   class="link-light" />
+            </td>
+            <td><a th:href="@{/cars/{id}(id = ${car.id})}" th:text="${car.pricePerDay}" class="link-light" /></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
